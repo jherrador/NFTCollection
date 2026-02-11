@@ -6,6 +6,7 @@ import "../lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol";
 import "../lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 
 import {Strings} from "../lib/openzeppelin-contracts/contracts/utils/Strings.sol";
+
 contract BANFTCollection is ERC721, Ownable {
     using Strings for uint256;
 
@@ -52,16 +53,16 @@ contract BANFTCollection is ERC721, Ownable {
         nftPrice = nftPrice_;
     }
 
-    function setSalesStartBlock(uint256 saleStartBlock_) external onlyOwner {
+    function setSaleStartBlock(uint256 saleStartBlock_) external onlyOwner {
         require(salesStarted == false, "Sale already started");
         saleStartBlock = saleStartBlock_;
     }
 
-    function _baseURI() internal override view virtual returns (string memory) { 
+    function _baseURI() internal view virtual override returns (string memory) {
         return baseUri;
     }
 
-    function tokenURI(uint256 tokenId) public view override virtual returns (string memory) {
+    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
         _requireOwned(tokenId);
 
         string memory baseURI = _baseURI();
